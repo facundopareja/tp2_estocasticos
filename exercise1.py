@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from constants import FILES
+
 orders = [2, 13, 30]
-files = ['eeg_ojos_abiertos_t7.csv', 'eeg_ojos_cerrados_t7.csv']
 
 
 def biased_R_estimator(x, k):
@@ -51,7 +52,7 @@ def ar_model(x, P):
 def point_b_parameters():
     """"Muestra parametros (coeficientes a y ganancia G) para archivos y ordenes definidos arriba."""
     for order in orders:
-        for file in files:
+        for file in FILES:
             loaded_file = np.loadtxt(file, dtype=float)
             a, G = ar_model(loaded_file, order)
             print(f"Los coeficientes para el archivo {file} orden {order} son {a} con factor estimado de ganancia {G}")
@@ -78,7 +79,7 @@ def model_psd(w, a_coefficients, gain_factor, P):
 
 def point_b_graphs():
     """" Grafica periodograma superpuesto sobre PSD del modelo en base a los parametros estimados."""
-    for file in files:
+    for file in FILES:
         signal = np.loadtxt(file, dtype=float)
         x = np.linspace(0, 2 * np.pi, 100)
         for order in orders:
@@ -89,6 +90,6 @@ def point_b_graphs():
             plt.title(f"Archivo: {file} - Comparacion entre periodograma y PSD para orden {order}", fontsize=8)
             plt.show()
 
-#point_b_parameters()
-point_b_graphs()
 
+#point_b_parameters()
+#point_b_graphs()
