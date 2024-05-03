@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from constants import FILES, ORDERS
 from util import ar_model, model_psd, biased_R_estimator
 
+
 def point_b_parameters():
     """"Muestra parametros (coeficientes a y ganancia G) para archivos y ordenes definidos arriba."""
     for order in ORDERS:
@@ -21,6 +22,7 @@ def periodgram(w, signal):
     for k in range(-N + 1, N):
         total_sum += np.multiply(biased_R_estimator(signal, abs(k)), np.exp(1j * -w * k))
     return total_sum
+
 
 def point_b_graphs():
     """" Grafica periodograma superpuesto sobre PSD del modelo en base a los parametros estimados."""
